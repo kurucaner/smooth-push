@@ -1,6 +1,6 @@
 {
   "name": "smooth-toast",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Toast notification for React Native Apps",
   "keywords": [
     "react native",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "foo"
+    "url": "https://github.com/kurucaner/smooth-toast"
   },
   "license": "MIT",
   "author": "CK",

@@ -166,10 +166,12 @@ export const SmoothToastProvider = memo(({ defaultConfig }: SmoothToastProviderP
 
   const gestureHandler = Gesture.Pan()
     .onStart(event => {
+      "worklet";
       isDragging.value = true;
       event.translationY = translateY.value;
     })
     .onUpdate(event => {
+      "worklet";
       if (event.translationY > 0) {
         translateY.value = event.translationY / 15;
       } else {
@@ -177,14 +179,13 @@ export const SmoothToastProvider = memo(({ defaultConfig }: SmoothToastProviderP
       }
     })
     .onEnd(event => {
+      "worklet";
       isDragging.value = false;
       if (event.translationY < swipeThreshold) {
-        // User swiped up, close the notification
         translateY.value = withTiming(INITIAL_POSITION, {
           duration: DURATION
         });
       } else {
-        // Return to original position
         translateY.value = withSpring(0);
       }
       if (isFinished.value) {
