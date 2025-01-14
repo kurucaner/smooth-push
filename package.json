@@ -1,27 +1,13 @@
 {
   "name": "smooth-toast",
   "version": "1.0.4",
-  "description": "Toast notification for React Native Apps",
-  "keywords": [
-    "react native",
-    "expo",
-    "toast",
-    "notification"
-  ],
+  "author": "CK",
   "repository": {
     "type": "git",
     "url": "https://github.com/kurucaner/smooth-toast"
   },
-  "license": "MIT",
-  "author": "CK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "format": "prettier --write .",
-    "lint": "prettier --check . && tsc"
-  },
   "devDependencies": {
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",
@@ -29,10 +15,24 @@
     "@types/react": "^19.0.7"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-native": ">=0.74",
+    "react": "*",
+    "react-native": "*",
     "react-native-gesture-handler": ">=2.19.0",
     "react-native-reanimated": ">=3.10.0",
     "expo-blur": ">=13.0.0"
-  }
+  },
+  "description": "Toast notification for React Native Apps",
+  "keywords": [
+    "react native",
+    "expo",
+    "toast",
+    "notification"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && tsc"
+  },
+  "types": "dist/index.d.ts"
 }
