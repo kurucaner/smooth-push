@@ -1,0 +1,36 @@
+{
+  "name": "smooth-toast",
+  "version": "1.0.2",
+  "description": "Toast notification for React Native Apps",
+  "keywords": [
+    "react native",
+    "expo",
+    "toast",
+    "notification"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "foo"
+  },
+  "license": "MIT",
+  "author": "CK",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "@types/react": "^19.0.7"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.74",
+    "react-native-gesture-handler": ">=2.19.0",
+    "react-native-reanimated": ">=3.10.0",
+    "expo-blur": ">=13.0.0"
+  }
+}
