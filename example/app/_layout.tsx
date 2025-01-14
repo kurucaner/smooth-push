@@ -9,10 +9,28 @@ export default function RootLayout() {
       <View style={styles.container}>
         <SmoothToastProvider />
         <Button
-          title="Show Toast"
+          title="Show Success"
           onPress={() => {
             show({
               toastType: "success",
+              message: "Hello, World!"
+            });
+          }}
+        />
+        <Button
+          title="Show Error"
+          onPress={() => {
+            show({
+              toastType: "error",
+              message: "Hello, World!"
+            });
+          }}
+        />
+        <Button
+          title="Show None"
+          onPress={() => {
+            show({
+              toastType: "none",
               message: "Hello, World!"
             });
           }}

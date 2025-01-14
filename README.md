@@ -2,6 +2,8 @@
 
 A smooth, gesture-based toast notification component for React Native.
 
+![Smooth Toast Preview](./docs/preview.gif)
+
 ## Features
 
 - 🎨 Beautiful, minimal design with blur effect
