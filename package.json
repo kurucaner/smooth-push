@@ -1,10 +1,10 @@
 {
-  "name": "smooth-toast",
-  "version": "1.1.2",
+  "name": "smooth-push",
+  "version": "1.1.3",
   "author": "CK",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kurucaner/smooth-toast"
+    "url": "https://github.com/kurucaner/smooth-push"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -21,12 +21,13 @@
     "react-native-reanimated": ">=3.10.0",
     "expo-blur": ">=13.0.0"
   },
-  "description": "Toast notification for React Native Apps",
+  "description": "Smooth Toast: Lightweight Toast Notifications Inspired by Push Notifications for React Native",
   "keywords": [
     "react native",
     "expo",
-    "toast",
-    "notification"
+    "push",
+    "notification",
+    "toast"
   ],
   "license": "MIT",
   "scripts": {
