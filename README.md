@@ -1,8 +1,8 @@
-# Smooth Toast
+# Smooth Push
 
 A smooth, gesture-based toast notification component for React Native.
 
-<img src="./docs/preview.gif" width="300" alt="Smooth Toast Preview">
+<img src="./docs/preview.gif" width="300" alt="Smooth Push Preview">
 
 ## Features
 
@@ -16,7 +16,7 @@ A smooth, gesture-based toast notification component for React Native.
 ## Installation
 
 ```bash
-npm install smooth-toast
+npm install smooth-push
 ```
 
 ### Required Dependencies
@@ -39,30 +39,30 @@ plugins: [
 ],
 ```
 
-### 2. Wrap Your App with GestureHandlerRootView and import SmoothToastProvider
+### 2. Wrap Your App with GestureHandlerRootView and import SmoothPushProvider
 
 In your app's root component (usually `App.js` or `_layout.tsx`), wrap your entire app with `GestureHandlerRootView`:
 
 ```js
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SmoothToastProvider } from "smooth-toast";
+import { SmoothPushProvider } from "smooth-push";
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SmoothToastProvider />
+      <SmoothPushProvider />
       {/* Your app components go here */}
     </GestureHandlerRootView>
   );
 }
 ```
 
-### 3. Use SmoothToastProvider in Your App
+### 3. Use SmoothPushProvider in Your App
 
 Now you can use the `show` function to display toast notifications:
 
 ```js
-import { show } from "smooth-toast";
+import { show } from "smooth-push";
 // Basic usage
 show({
   toastType: "success",
@@ -84,13 +84,13 @@ show({
 
 You can customize the toast notifications in two ways:
 
-1. Default configuration through the `SmoothToastProvider`
+1. Default configuration through the `SmoothPushProvider`
 2. Per-notification configuration when calling `show()`
 
 ### Provider Configuration
 
 ```js
-<SmoothToastProvider
+<SmoothPushProvider
   defaultConfig={{
     duration: 5000,
     position: "top",
@@ -123,7 +123,7 @@ You can customize the toast notifications in two ways:
 ## Types
 
 ```ts
-type SmoothToastType = "success" | "error" | "none";
+type SmoothPushType = "success" | "error" | "none";
 
 interface NotificationConfig {
   duration?: number;
@@ -139,7 +139,7 @@ interface NotificationConfig {
 }
 
 interface ShowNotification {
-  toastType: SmoothToastType;
+  toastType: SmoothPushType;
   message: string;
   config?: NotificationConfig;
 }

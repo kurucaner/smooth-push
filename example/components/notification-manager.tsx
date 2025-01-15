@@ -13,7 +13,7 @@ import Animated, {
   withTiming
 } from "react-native-reanimated";
 
-export type SmoothToastType = "success" | "error" | "none";
+export type SmoothPushType = "success" | "error" | "none";
 export interface NotificationConfig {
   duration?: number;
   position?: "top" | "bottom";
@@ -27,13 +27,13 @@ export interface NotificationConfig {
   swipeThreshold?: number;
 }
 
-export interface SmoothToastNotification {
-  toastType: SmoothToastType;
+export interface SmoothPushNotification {
+  toastType: SmoothPushType;
   message: string;
   config?: NotificationConfig;
 }
 
-export type ShowNotification = SmoothToastNotification;
+export type ShowNotification = SmoothPushNotification;
 
 let showNotification: (params: ShowNotification) => void;
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -42,12 +42,12 @@ const INITIAL_POSITION = -180;
 const SWIPE_THRESHOLD = -55;
 const DURATION = 400;
 
-interface SmoothToastContainerProps {
-  type?: SmoothToastType | null;
+interface SmoothPushContainerProps {
+  type?: SmoothPushType | null;
   message?: string | null;
   textStyle?: TextStyle | null;
 }
-const SmoothToast = memo(({ type, message, textStyle }: SmoothToastContainerProps) => {
+const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps) => {
   const scale = useSharedValue(0);
   const progress = useSharedValue(0);
   const messageOpacity = useSharedValue(0);
@@ -119,7 +119,7 @@ const SmoothToast = memo(({ type, message, textStyle }: SmoothToastContainerProp
     return null;
   }
   return (
-    <View style={styles.smoothToastContainer}>
+    <View style={styles.smoothPushContainer}>
       <Animated.View style={[styles.iconContainer, containerStyle]}>
         <Animated.View style={iconStyle}>{getIcon}</Animated.View>
       </Animated.View>
@@ -132,15 +132,15 @@ const SmoothToast = memo(({ type, message, textStyle }: SmoothToastContainerProp
   );
 });
 
-SmoothToast.displayName = "SmoothToast";
+SmoothPush.displayName = "SmoothPush";
 
-interface SmoothToastProviderProps {
+interface SmoothPushProviderProps {
   defaultConfig?: NotificationConfig;
 }
 
-export const SmoothToastProvider = memo(({ defaultConfig }: SmoothToastProviderProps) => {
+export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderProps) => {
   const [data, setData] = useState<string | null>(null);
-  const [toastType, setToastType] = useState<SmoothToastType | null>(null);
+  const [toastType, setToastType] = useState<SmoothPushType | null>(null);
   const [currentConfig, setCurrentConfig] = useState<NotificationConfig>(defaultConfig ?? {});
 
   const {
@@ -244,7 +244,7 @@ export const SmoothToastProvider = memo(({ defaultConfig }: SmoothToastProviderP
       <Animated.View style={containerStyle}>
         <BlurView intensity={blurIntensity} style={styles.blurContainer} tint="light">
           <Pressable onPress={handleOnPress} style={styles.notification}>
-            <SmoothToast type={toastType} message={data} textStyle={currentConfig.textStyle} />
+            <SmoothPush type={toastType} message={data} textStyle={currentConfig.textStyle} />
           </Pressable>
         </BlurView>
         <View style={styles.stick} />
@@ -253,7 +253,7 @@ export const SmoothToastProvider = memo(({ defaultConfig }: SmoothToastProviderP
   );
 });
 
-SmoothToastProvider.displayName = "SmoothToastProvider";
+SmoothPushProvider.displayName = "SmoothPushProvider";
 
 // Styles for the notification
 const styles = StyleSheet.create({
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     color: "#333333",
     fontSize: 16
   },
-  smoothToastContainer: {
+  smoothPushContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
