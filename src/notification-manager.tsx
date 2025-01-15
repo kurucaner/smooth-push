@@ -289,19 +289,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: "#ffcad4"
   },
-  imageContainer: {
-    borderRadius: 20,
-    overflow: "hidden",
-    backgroundColor: "#FFF",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 40,
-    height: 40
-  },
-  image: {
-    width: 40,
-    height: 40
-  },
   notificationText: {
     flex: 1,
     color: "#333333",
