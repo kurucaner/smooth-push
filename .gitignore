@@ -1,5 +1,4 @@
 .history
 node_modules
-dist
 .vscode
 bun.lockb
