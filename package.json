@@ -18,8 +18,7 @@
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": ">=2.19.0",
-    "react-native-reanimated": ">=3.10.0",
-    "expo-blur": ">=13.0.0"
+    "react-native-reanimated": ">=3.10.0"
   },
   "description": "Smooth Toast: Lightweight Toast Notifications Inspired by Push Notifications for React Native",
   "keywords": [
