@@ -1,4 +1,3 @@
-import { BlurView } from "expo-blur";
 import { memo, useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, View, Text, type TextStyle, ViewStyle } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -242,11 +241,11 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
   return (
     <GestureDetector gesture={gestureHandler}>
       <Animated.View style={containerStyle}>
-        <BlurView intensity={blurIntensity} style={styles.blurContainer} tint="light">
+        <Animated.View style={styles.blurContainer}>
           <Pressable onPress={handleOnPress} style={styles.notification}>
             <SmoothPush type={toastType} message={data} textStyle={currentConfig.textStyle} />
           </Pressable>
-        </BlurView>
+        </Animated.View>
         <View style={styles.stick} />
       </Animated.View>
     </GestureDetector>
@@ -271,9 +270,17 @@ const styles = StyleSheet.create({
   },
   blurContainer: {
     flex: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
     borderRadius: 10,
-    padding: 10
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5
   },
   notification: {
     flexDirection: "row",
