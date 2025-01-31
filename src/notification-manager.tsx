@@ -23,6 +23,7 @@ export interface NotificationConfig {
   onPress?: () => void;
   onClose?: () => void;
   swipeThreshold?: number;
+  stickColor?: string;
 }
 
 export interface SmoothPushNotification {
@@ -31,9 +32,7 @@ export interface SmoothPushNotification {
   config?: NotificationConfig;
 }
 
-export type ShowNotification = SmoothPushNotification;
-
-let showNotification: (params: ShowNotification) => void;
+let showNotification: (params: SmoothPushNotification) => void;
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const INITIAL_POSITION = -180;
@@ -147,6 +146,7 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     offset = 60,
     maxWidth = 400,
     swipeThreshold = SWIPE_THRESHOLD,
+    stickColor = "#ffcad4",
     onPress,
     onClose
   } = currentConfig;
@@ -197,7 +197,7 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     onClose?.();
   };
 
-  showNotification = (params: ShowNotification) => {
+  showNotification = (params: SmoothPushNotification) => {
     isFinished.value = false;
 
     if (timeoutId) {
@@ -236,6 +236,8 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     [position, offset, maxWidth, currentConfig.containerStyle, animatedStyle]
   );
 
+  const stickStyle = useMemo(() => [styles.stick, { backgroundColor: stickColor }], [stickColor]);
+
   return (
     <GestureDetector gesture={gestureHandler}>
       <Animated.View style={containerStyle}>
@@ -244,7 +246,7 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
             <SmoothPush type={toastType} message={data} textStyle={currentConfig.textStyle} />
           </Pressable>
         </Animated.View>
-        <View style={styles.stick} />
+        <View style={stickStyle} />
       </Animated.View>
     </GestureDetector>
   );
@@ -335,7 +337,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const show = (params: ShowNotification) => {
+export const show = (params: SmoothPushNotification) => {
   if (showNotification) {
     showNotification(params);
   }

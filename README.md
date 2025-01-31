@@ -119,6 +119,7 @@ You can customize the toast notifications in two ways:
 | onPress        | () => void        | undefined | Callback when toast is pressed               |
 | onClose        | () => void        | undefined | Callback when toast is dismissed             |
 | swipeThreshold | number            | -55       | Threshold for swipe to dismiss               |
+| stickColor     | string            | "#ffcad4" | Color of the bottom indicator stick         |
 
 ## Types
 
@@ -136,6 +137,7 @@ interface NotificationConfig {
   onPress?: () => void;
   onClose?: () => void;
   swipeThreshold?: number;
+  stickColor?: string;
 }
 
 interface ShowNotification {
