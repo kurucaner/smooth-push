@@ -6,7 +6,7 @@ A smooth, gesture-based toast notification component for React Native.
 
 ## Features
 
-- 🎨 Beautiful, minimal design with blur effect
+- 🎨 Beautiful, minimal design with translucent effect
 - 👆 Gesture support (swipe to dismiss)
 - 🎯 Highly customizable
 - 💫 Smooth animations
@@ -24,7 +24,7 @@ npm install smooth-push
 This package requires the following peer dependencies:
 
 ```bash
-npm install react-native-reanimated react-native-gesture-handler expo-blur
+npm install react-native-reanimated react-native-gesture-handler
 ```
 
 ## Setup

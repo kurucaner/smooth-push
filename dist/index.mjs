@@ -1,5 +1,23 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+
+// src/notification-manager.tsx
 import { memo, useEffect, useMemo, useState } from "react";
-import { Pressable, StyleSheet, View, Text, type TextStyle, ViewStyle } from "react-native";
+import { Pressable, StyleSheet, View, Text } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Easing,
@@ -11,58 +29,25 @@ import Animated, {
   withSpring,
   withTiming
 } from "react-native-reanimated";
-
-export type SmoothPushType = "success" | "error" | "none";
-export interface NotificationConfig {
-  duration?: number;
-  position?: "top" | "bottom";
-  offset?: number;
-  maxWidth?: number;
-  blurIntensity?: number;
-  containerStyle?: ViewStyle;
-  textStyle?: TextStyle;
-  onPress?: () => void;
-  onClose?: () => void;
-  swipeThreshold?: number;
-}
-
-export interface SmoothPushNotification {
-  toastType: SmoothPushType;
-  message: string;
-  config?: NotificationConfig;
-}
-
-export type ShowNotification = SmoothPushNotification;
-
-let showNotification: (params: ShowNotification) => void;
-let timeoutId: ReturnType<typeof setTimeout> | null = null;
-
-const INITIAL_POSITION = -180;
-const SWIPE_THRESHOLD = -55;
-const DURATION = 400;
-
-interface SmoothPushContainerProps {
-  type?: SmoothPushType | null;
-  message?: string | null;
-  textStyle?: TextStyle | null;
-}
-const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps) => {
+import { jsx, jsxs } from "react/jsx-runtime";
+var showNotification;
+var timeoutId = null;
+var INITIAL_POSITION = -180;
+var SWIPE_THRESHOLD = -55;
+var DURATION = 400;
+var SmoothPush = memo(({ type, message, textStyle }) => {
   const scale = useSharedValue(0);
   const progress = useSharedValue(0);
   const messageOpacity = useSharedValue(0);
-
   useEffect(() => {
     scale.value = 0;
     progress.value = 0;
     messageOpacity.value = 0;
-
-    // Smoother initial animation
     scale.value = withTiming(1, {
       duration: 400,
-      easing: Easing.bezier(0.34, 1.56, 0.64, 1) // Custom bounce effect
+      easing: Easing.bezier(0.34, 1.56, 0.64, 1)
+      // Custom bounce effect
     });
-
-    // Animate the checkmark/x with a nice draw effect
     progress.value = withDelay(
       100,
       withTiming(1, {
@@ -70,8 +55,6 @@ const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps)
         easing: Easing.bezier(0.65, 0, 0.35, 1)
       })
     );
-
-    // Fade in the message
     messageOpacity.value = withDelay(
       200,
       withTiming(1, {
@@ -80,12 +63,10 @@ const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps)
       })
     );
   }, [type, message]);
-
   const containerStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
     backgroundColor: type === "success" ? "#E7F6E7" : "#FEE7E7"
   }));
-
   const iconStyle = useAnimatedStyle(() => ({
     opacity: progress.value,
     transform: [
@@ -94,7 +75,6 @@ const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps)
       }
     ]
   }));
-
   const messageStyle = useAnimatedStyle(() => ({
     opacity: messageOpacity.value,
     transform: [
@@ -103,47 +83,30 @@ const SmoothPush = memo(({ type, message, textStyle }: SmoothPushContainerProps)
       }
     ]
   }));
-
   const getIcon = useMemo(() => {
     if (type === "success") {
-      return <Text style={[styles.icon, styles.successIcon]}>✓</Text>;
+      return /* @__PURE__ */ jsx(Text, { style: [styles.icon, styles.successIcon], children: "\u2713" });
     }
     if (type === "error") {
-      return <Text style={[styles.icon, styles.errorIcon]}>✕</Text>;
+      return /* @__PURE__ */ jsx(Text, { style: [styles.icon, styles.errorIcon], children: "\u2715" });
     }
     return null;
   }, [type]);
-
   if (!message) {
     return null;
   }
-  return (
-    <View style={styles.smoothPushContainer}>
-      <Animated.View style={[styles.iconContainer, containerStyle]}>
-        <Animated.View style={iconStyle}>{getIcon}</Animated.View>
-      </Animated.View>
-      <Animated.View style={[styles.messageContainer, messageStyle]}>
-        <Text style={[styles.toastMessage, textStyle]} numberOfLines={3}>
-          {message}
-        </Text>
-      </Animated.View>
-    </View>
-  );
+  return /* @__PURE__ */ jsxs(View, { style: styles.smoothPushContainer, children: [
+    /* @__PURE__ */ jsx(Animated.View, { style: [styles.iconContainer, containerStyle], children: /* @__PURE__ */ jsx(Animated.View, { style: iconStyle, children: getIcon }) }),
+    /* @__PURE__ */ jsx(Animated.View, { style: [styles.messageContainer, messageStyle], children: /* @__PURE__ */ jsx(Text, { style: [styles.toastMessage, textStyle], numberOfLines: 3, children: message }) })
+  ] });
 });
-
 SmoothPush.displayName = "SmoothPush";
-
-interface SmoothPushProviderProps {
-  defaultConfig?: NotificationConfig;
-}
-
-export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderProps) => {
-  const [data, setData] = useState<string | null>(null);
-  const [toastType, setToastType] = useState<SmoothPushType | null>(null);
-  const [currentConfig, setCurrentConfig] = useState<NotificationConfig>(defaultConfig ?? {});
-
+var SmoothPushProvider = memo(({ defaultConfig }) => {
+  const [data, setData] = useState(null);
+  const [toastType, setToastType] = useState(null);
+  const [currentConfig, setCurrentConfig] = useState(defaultConfig != null ? defaultConfig : {});
   const {
-    duration = 6000,
+    duration = 6e3,
     position = "top",
     offset = 60,
     maxWidth = 400,
@@ -152,66 +115,54 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     onPress,
     onClose
   } = currentConfig;
-
   const translateY = useSharedValue(INITIAL_POSITION);
   const isDragging = useSharedValue(false);
   const isFinished = useSharedValue(false);
-
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }]
     };
   });
-
-  const gestureHandler = Gesture.Pan()
-    .onStart(event => {
-      "worklet";
-      isDragging.value = true;
-      event.translationY = translateY.value;
-    })
-    .onUpdate(event => {
-      "worklet";
-      if (event.translationY > 0) {
-        translateY.value = event.translationY / 15;
-      } else {
-        translateY.value = event.translationY;
-      }
-    })
-    .onEnd(event => {
-      "worklet";
-      isDragging.value = false;
-      if (event.translationY < swipeThreshold) {
-        translateY.value = withTiming(INITIAL_POSITION, {
-          duration: DURATION
-        });
-      } else {
-        translateY.value = withSpring(0);
-      }
-      if (isFinished.value) {
-        translateY.value = withTiming(INITIAL_POSITION, {
-          duration: DURATION
-        });
-      }
-    });
-
+  const gestureHandler = Gesture.Pan().onStart((event) => {
+    "worklet";
+    isDragging.value = true;
+    event.translationY = translateY.value;
+  }).onUpdate((event) => {
+    "worklet";
+    if (event.translationY > 0) {
+      translateY.value = event.translationY / 15;
+    } else {
+      translateY.value = event.translationY;
+    }
+  }).onEnd((event) => {
+    "worklet";
+    isDragging.value = false;
+    if (event.translationY < swipeThreshold) {
+      translateY.value = withTiming(INITIAL_POSITION, {
+        duration: DURATION
+      });
+    } else {
+      translateY.value = withSpring(0);
+    }
+    if (isFinished.value) {
+      translateY.value = withTiming(INITIAL_POSITION, {
+        duration: DURATION
+      });
+    }
+  });
   const handleClose = () => {
     translateY.value = withTiming(INITIAL_POSITION, { duration: DURATION });
-    onClose?.();
+    onClose == null ? void 0 : onClose();
   };
-
-  showNotification = (params: ShowNotification) => {
+  showNotification = (params) => {
     isFinished.value = false;
-
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
-
     setToastType(params.toastType);
     setData(params.message);
-    setCurrentConfig({ ...defaultConfig, ...params.config });
-
+    setCurrentConfig(__spreadValues(__spreadValues({}, defaultConfig), params.config));
     translateY.value = withTiming(0, { duration: DURATION });
-
     timeoutId = setTimeout(() => {
       if (!isDragging.value) {
         handleClose();
@@ -219,12 +170,10 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
       isFinished.value = true;
     }, duration);
   };
-
   const handleOnPress = () => {
-    onPress?.();
+    onPress == null ? void 0 : onPress();
     handleClose();
   };
-
   const containerStyle = useMemo(
     () => [
       styles.container,
@@ -237,25 +186,13 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     ],
     [position, offset, maxWidth, currentConfig.containerStyle, animatedStyle]
   );
-
-  return (
-    <GestureDetector gesture={gestureHandler}>
-      <Animated.View style={containerStyle}>
-        <Animated.View style={styles.blurContainer}>
-          <Pressable onPress={handleOnPress} style={styles.notification}>
-            <SmoothPush type={toastType} message={data} textStyle={currentConfig.textStyle} />
-          </Pressable>
-        </Animated.View>
-        <View style={styles.stick} />
-      </Animated.View>
-    </GestureDetector>
-  );
+  return /* @__PURE__ */ jsx(GestureDetector, { gesture: gestureHandler, children: /* @__PURE__ */ jsxs(Animated.View, { style: containerStyle, children: [
+    /* @__PURE__ */ jsx(Animated.View, { style: styles.blurContainer, children: /* @__PURE__ */ jsx(Pressable, { onPress: handleOnPress, style: styles.notification, children: /* @__PURE__ */ jsx(SmoothPush, { type: toastType, message: data, textStyle: currentConfig.textStyle }) }) }),
+    /* @__PURE__ */ jsx(View, { style: styles.stick })
+  ] }) });
 });
-
 SmoothPushProvider.displayName = "SmoothPushProvider";
-
-// Styles for the notification
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     width: "90%",
     maxWidth: 400,
@@ -336,9 +273,12 @@ const styles = StyleSheet.create({
     fontWeight: "500"
   }
 });
-
-export const show = (params: ShowNotification) => {
+var show = (params) => {
   if (showNotification) {
     showNotification(params);
   }
+};
+export {
+  SmoothPushProvider,
+  show
 };
