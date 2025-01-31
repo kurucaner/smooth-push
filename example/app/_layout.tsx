@@ -1,6 +1,6 @@
 import "react-native-reanimated";
 import { Button, StyleSheet, View } from "react-native";
-import { show, SmoothPushProvider } from "@/components";
+import { show, SmoothPushProvider } from "smooth-push";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
