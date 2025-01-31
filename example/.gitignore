@@ -37,4 +37,8 @@ yarn-error.*
 
 app-example
 package-lock.json
-
+yarn.lock
+pnpm-lock.yaml
+deno.lock
+bun.lockb
+bun.lock
