@@ -39,7 +39,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "smooth-push": "^1.4.1"
+    "smooth-push": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

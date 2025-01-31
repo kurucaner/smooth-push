@@ -13,7 +13,10 @@ export default function RootLayout() {
           onPress={() => {
             show({
               toastType: "success",
-              message: "Hello, World!"
+              message: "Hello, World!",
+              config: {
+                stickColor: "red"
+              }
             });
           }}
         />
