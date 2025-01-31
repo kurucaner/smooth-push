@@ -20,10 +20,11 @@ interface SmoothPushNotification {
     message: string;
     config?: NotificationConfig;
 }
+
 interface SmoothPushProviderProps {
     defaultConfig?: NotificationConfig;
 }
 declare const SmoothPushProvider: react.MemoExoticComponent<({ defaultConfig }: SmoothPushProviderProps) => react_jsx_runtime.JSX.Element>;
 declare const show: (params: SmoothPushNotification) => void;
 
-export { type NotificationConfig, type SmoothPushNotification, SmoothPushProvider, type SmoothPushType, show };
+export { SmoothPushProvider, show };
