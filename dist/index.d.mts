@@ -8,23 +8,22 @@ interface NotificationConfig {
     position?: "top" | "bottom";
     offset?: number;
     maxWidth?: number;
-    blurIntensity?: number;
     containerStyle?: ViewStyle;
     textStyle?: TextStyle;
     onPress?: () => void;
     onClose?: () => void;
     swipeThreshold?: number;
+    stickColor?: string;
 }
 interface SmoothPushNotification {
     toastType: SmoothPushType;
     message: string;
     config?: NotificationConfig;
 }
-type ShowNotification = SmoothPushNotification;
 interface SmoothPushProviderProps {
     defaultConfig?: NotificationConfig;
 }
 declare const SmoothPushProvider: react.MemoExoticComponent<({ defaultConfig }: SmoothPushProviderProps) => react_jsx_runtime.JSX.Element>;
-declare const show: (params: ShowNotification) => void;
+declare const show: (params: SmoothPushNotification) => void;
 
-export { type NotificationConfig, type ShowNotification, type SmoothPushNotification, SmoothPushProvider, type SmoothPushType, show };
+export { type NotificationConfig, type SmoothPushNotification, SmoothPushProvider, type SmoothPushType, show };
