@@ -8,21 +8,6 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "react-native": "dist/index.js",
-  "source": "src/index.ts",
-  "expo": {
-    "modules": ["smooth-push"],
-    "platform": "react-native"
-  },
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "react-native": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "devDependencies": {
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",

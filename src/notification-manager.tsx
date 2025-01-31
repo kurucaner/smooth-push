@@ -18,7 +18,6 @@ export interface NotificationConfig {
   position?: "top" | "bottom";
   offset?: number;
   maxWidth?: number;
-  blurIntensity?: number;
   containerStyle?: ViewStyle;
   textStyle?: TextStyle;
   onPress?: () => void;
@@ -147,7 +146,6 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
     position = "top",
     offset = 60,
     maxWidth = 400,
-    blurIntensity = 50,
     swipeThreshold = SWIPE_THRESHOLD,
     onPress,
     onClose
