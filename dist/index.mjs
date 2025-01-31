@@ -110,8 +110,8 @@ var SmoothPushProvider = memo(({ defaultConfig }) => {
     position = "top",
     offset = 60,
     maxWidth = 400,
-    blurIntensity = 50,
     swipeThreshold = SWIPE_THRESHOLD,
+    stickColor = "#ffcad4",
     onPress,
     onClose
   } = currentConfig;
@@ -186,9 +186,10 @@ var SmoothPushProvider = memo(({ defaultConfig }) => {
     ],
     [position, offset, maxWidth, currentConfig.containerStyle, animatedStyle]
   );
+  const stickStyle = useMemo(() => [styles.stick, { backgroundColor: stickColor }], [stickColor]);
   return /* @__PURE__ */ jsx(GestureDetector, { gesture: gestureHandler, children: /* @__PURE__ */ jsxs(Animated.View, { style: containerStyle, children: [
     /* @__PURE__ */ jsx(Animated.View, { style: styles.blurContainer, children: /* @__PURE__ */ jsx(Pressable, { onPress: handleOnPress, style: styles.notification, children: /* @__PURE__ */ jsx(SmoothPush, { type: toastType, message: data, textStyle: currentConfig.textStyle }) }) }),
-    /* @__PURE__ */ jsx(View, { style: styles.stick })
+    /* @__PURE__ */ jsx(View, { style: stickStyle })
   ] }) });
 });
 SmoothPushProvider.displayName = "SmoothPushProvider";

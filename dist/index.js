@@ -135,8 +135,8 @@ var SmoothPushProvider = (0, import_react.memo)(({ defaultConfig }) => {
     position = "top",
     offset = 60,
     maxWidth = 400,
-    blurIntensity = 50,
     swipeThreshold = SWIPE_THRESHOLD,
+    stickColor = "#ffcad4",
     onPress,
     onClose
   } = currentConfig;
@@ -211,9 +211,10 @@ var SmoothPushProvider = (0, import_react.memo)(({ defaultConfig }) => {
     ],
     [position, offset, maxWidth, currentConfig.containerStyle, animatedStyle]
   );
+  const stickStyle = (0, import_react.useMemo)(() => [styles.stick, { backgroundColor: stickColor }], [stickColor]);
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native_gesture_handler.GestureDetector, { gesture: gestureHandler, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react_native_reanimated.default.View, { style: containerStyle, children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native_reanimated.default.View, { style: styles.blurContainer, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.Pressable, { onPress: handleOnPress, style: styles.notification, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SmoothPush, { type: toastType, message: data, textStyle: currentConfig.textStyle }) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.View, { style: styles.stick })
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_native.View, { style: stickStyle })
   ] }) });
 });
 SmoothPushProvider.displayName = "SmoothPushProvider";
