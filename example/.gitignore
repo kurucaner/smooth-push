@@ -36,9 +36,11 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+# lock files
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 deno.lock
+# "bun install" command generates bun.lockb file for the users who uses bun version 1.1.19 and below
 bun.lockb
 bun.lock
