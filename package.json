@@ -1,6 +1,6 @@
 {
   "name": "smooth-push",
-  "version": "1.5.3",
+  "version": "1.5.9",
   "author": "CK",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/react": "^19.0.7",
     "prettier": "^3.4.2",
@@ -31,10 +32,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --minify",
     "format": "prettier --write .",
     "lint": "prettier --check . && tsc",
-    "publish": "rimraf dist && npm run build && npm publish"
-  },
-  "types": "dist/index.d.ts"
+    "pub": "rimraf dist && npm run build && npm publish"
+  }
 }
