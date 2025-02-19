@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   blurContainer: {
     flex: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    backgroundColor: "rgb(255, 255, 255)",
     borderRadius: 10,
     padding: 10,
     shadowColor: "#000",
