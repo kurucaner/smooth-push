@@ -47,10 +47,12 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
 
   const gestureHandler = Gesture.Pan()
     .onStart(event => {
+      "worklet";
       isDragging.value = true;
       event.translationY = translateY.value;
     })
     .onUpdate(event => {
+      "worklet";
       if (event.translationY > 0) {
         translateY.value = event.translationY / 15;
       } else {
@@ -58,6 +60,7 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
       }
     })
     .onEnd(event => {
+      "worklet";
       isDragging.value = false;
       if (event.translationY < swipeThreshold) {
         translateY.value = withTiming(INITIAL_POSITION, { duration: DURATION });
