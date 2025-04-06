@@ -1,11 +1,24 @@
 import "react-native-reanimated";
-import { Button, StyleSheet, View } from "react-native";
-import { show, SmoothPushProvider } from "smooth-push";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { show } from "@/components/org-smooth-push/notification-manager";
+import { SmoothPushProvider } from "@/components/org-smooth-push";
 
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={styles.flex}>
+      <View
+        style={{
+          position: "absolute",
+          top: 80,
+          left: 0,
+          right: 0,
+          width: "100%",
+          alignItems: "center"
+        }}
+      >
+        <Text>Hello, World!</Text>
+      </View>
       <View style={styles.container}>
         <SmoothPushProvider />
         <Button
@@ -15,7 +28,7 @@ export default function RootLayout() {
               toastType: "success",
               message: "Hello, World!",
               config: {
-                stickColor: "red"
+                stickColor: "green"
               }
             });
           }}
@@ -25,7 +38,10 @@ export default function RootLayout() {
           onPress={() => {
             show({
               toastType: "error",
-              message: "Hello, World!"
+              message: "Hello, World!",
+              config: {
+                stickColor: "red"
+              }
             });
           }}
         />
@@ -34,7 +50,10 @@ export default function RootLayout() {
           onPress={() => {
             show({
               toastType: "none",
-              message: "Hello, World!"
+              message: "Hello, World!",
+              config: {
+                stickColor: "blue"
+              }
             });
           }}
         />
