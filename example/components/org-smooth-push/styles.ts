@@ -9,9 +9,7 @@ export const styles = StyleSheet.create({
     zIndex: 9999,
     alignSelf: "center",
     borderRadius: 10,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "#f5f3f4"
+    overflow: "hidden"
   },
   blurContainer: {
     flex: 1,
@@ -25,7 +23,9 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 5
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: "#f5f3f4"
   },
   notification: {
     flexDirection: "row",
