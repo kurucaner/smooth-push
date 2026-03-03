@@ -4,3 +4,4 @@ node_modules
 *.lock
 bun.lockb
 dist
+.DS_Store

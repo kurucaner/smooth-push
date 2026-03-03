@@ -110,10 +110,9 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
         [position]: offset,
         maxWidth
       },
-      currentConfig.containerStyle,
       animatedStyle
     ],
-    [position, offset, maxWidth, currentConfig.containerStyle, animatedStyle]
+    [position, offset, maxWidth, animatedStyle]
   );
 
   const stickStyle = useMemo(() => [styles.stick, { backgroundColor: stickColor }], [stickColor]);
@@ -121,7 +120,7 @@ export const SmoothPushProvider = memo(({ defaultConfig }: SmoothPushProviderPro
   return (
     <GestureDetector gesture={gestureHandler}>
       <Animated.View style={containerStyle}>
-        <Animated.View style={styles.blurContainer}>
+        <Animated.View style={[styles.blurContainer, currentConfig.containerStyle]}>
           <Pressable onPress={handleOnPress} style={styles.notification}>
             <SmoothPush type={toastType} message={data} textStyle={currentConfig.textStyle} />
           </Pressable>
