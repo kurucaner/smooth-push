@@ -46,6 +46,18 @@ export default function RootLayout() {
           }}
         />
         <Button
+          title="Show Info"
+          onPress={() => {
+            show({
+              toastType: "info",
+              message: "Here's some information for you.",
+              config: {
+                stickColor: "#1976D2"
+              }
+            });
+          }}
+        />
+        <Button
           title="Show None"
           onPress={() => {
             show({

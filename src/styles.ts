@@ -65,6 +65,9 @@ export const styles = StyleSheet.create({
   errorIcon: {
     color: "#D32F2F"
   },
+  infoIcon: {
+    color: "#1976D2"
+  },
   messageContainer: {
     flex: 1,
     paddingRight: 4

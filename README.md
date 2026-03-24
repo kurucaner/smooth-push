@@ -124,7 +124,7 @@ You can customize the toast notifications in two ways:
 ## Types
 
 ```ts
-type SmoothPushType = "success" | "error" | "none";
+type SmoothPushType = "success" | "error" | "info" | "none";
 
 interface NotificationConfig {
   duration?: number;

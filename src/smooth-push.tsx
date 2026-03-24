@@ -52,9 +52,16 @@ export const SmoothPush = memo(({ type, message, textStyle }: SmoothPushProps) =
     );
   }, [type, message]);
 
+  const ICON_BG_COLORS: Record<string, string> = {
+    success: "#E7F6E7",
+    error: "#FEE7E7",
+    info: "#E3F2FD",
+    none: "#F5F5F5"
+  };
+
   const containerStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
-    backgroundColor: type === "success" ? "#E7F6E7" : "#FEE7E7"
+    backgroundColor: ICON_BG_COLORS[type ?? "none"] ?? "#F5F5F5"
   }));
 
   const iconStyle = useAnimatedStyle(() => ({
@@ -82,6 +89,9 @@ export const SmoothPush = memo(({ type, message, textStyle }: SmoothPushProps) =
     if (type === "error") {
       return <Text style={[styles.icon, styles.errorIcon]}>✕</Text>;
     }
+    if (type === "info") {
+      return <Text style={[styles.icon, styles.infoIcon]}>ℹ</Text>;
+    }
     return null;
   };
 
@@ -91,9 +101,11 @@ export const SmoothPush = memo(({ type, message, textStyle }: SmoothPushProps) =
 
   return (
     <View style={styles.smoothPushContainer}>
-      <Animated.View style={[styles.iconContainer, containerStyle]}>
-        <Animated.View style={iconStyle}>{getIcon()}</Animated.View>
-      </Animated.View>
+      {type !== "none" && (
+        <Animated.View style={[styles.iconContainer, containerStyle]}>
+          <Animated.View style={iconStyle}>{getIcon()}</Animated.View>
+        </Animated.View>
+      )}
       <Animated.View style={[styles.messageContainer, messageStyle]}>
         <Text style={[styles.toastMessage, textStyle]} numberOfLines={3}>
           {message}

@@ -1,6 +1,6 @@
 import type { TextStyle, ViewStyle } from "react-native";
 
-export type SmoothPushType = "success" | "error" | "none";
+export type SmoothPushType = "success" | "error" | "info" | "none";
 
 export interface NotificationConfig {
   duration?: number;
