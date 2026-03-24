@@ -90,7 +90,7 @@ export const SmoothPush = memo(({ type, message, textStyle }: SmoothPushProps) =
       return <Text style={[styles.icon, styles.errorIcon]}>✕</Text>;
     }
     if (type === "info") {
-      return <Text style={[styles.icon, styles.infoIcon]}>ℹ</Text>;
+      return <Text style={[styles.icon, styles.infoIcon]}>i</Text>;
     }
     return null;
   };
